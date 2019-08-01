@@ -16,6 +16,7 @@ import com.policy.exception.PolicyException;
 import com.policy.model.PolicyListModel;
 import com.policy.model.PolicyModel;
 import com.policy.model.ResponseData;
+import com.policy.model.TrendModel;
 import com.policy.service.PolicyService;
 
 @RestController
@@ -47,5 +48,15 @@ public class PolicyController {
 		ResponseData response = new ResponseData("Please find below details of policy Id : " + policyId, status,
 				policyModel);
 		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+	@GetMapping("/trend/{sortBy}")
+	public ResponseEntity<ResponseData> getPolicyAnalysis(@PathVariable(value = "sortBy") String sortBy){
+
+		Map<Integer, String> statusMap = new HashMap<Integer, String>();
+		statusMap.put(200, "Search successful.");
+		TrendModel trendModel = policyService.getPolicyAnalysis(sortBy);
+		ResponseData response = new ResponseData("Policy trend Analysis is as below: ", statusMap, trendModel);
+
+		return new ResponseEntity(response, HttpStatus.OK);
 	}
 }
