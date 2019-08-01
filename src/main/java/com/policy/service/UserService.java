@@ -19,5 +19,4 @@ public interface UserService {
 
 	ByteArrayInputStream pdfUserPolicyFileReport(List<UserPolicyModel> userPolicyModelList)
 			throws DocumentException, PolicyException;
-
 }
