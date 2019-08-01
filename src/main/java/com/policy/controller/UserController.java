@@ -35,8 +35,8 @@ public class UserController
 	@Autowired
 	UserService userService;
 
-	@GetMapping("/{id}")
-	public ResponseEntity<InputStreamResource> userPolicyFileReport(@PathVariable("id") String userId)
+	@GetMapping(path = "/{userId}", produces = MediaType.APPLICATION_PDF_VALUE)
+	public ResponseEntity<InputStreamResource> userPolicyFileReport(@PathVariable("userId") String userId)
 			throws PolicyException, DocumentException {
 
 		List<UserPolicyModel> userPolicyModelList = userPolicyService.getUserPolicyByUserId(userId);
