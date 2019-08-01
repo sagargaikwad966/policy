@@ -1,8 +1,10 @@
 package com.policy.serviceimpl;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -80,10 +82,15 @@ public class UserServiceImpl implements UserService
 
 		for (UserPolicyModel userPolicyModel : userPolicyModelList) {
 
+			List<String> pdfDataList = new ArrayList<>();
+			
+			
 			PdfPCell cell;
 
 			String policyId = userPolicyModel.getPolicyId();
+			
 			PolicyModel policyDetails = policyService.policyDetails(policyId);
+			
 			String policyName = policyDetails.getPolicyName();
 			LocalDate dateOfPurchase = userPolicyModel.getDateOfPurchase();
 			String type = policyDetails.getType();
@@ -91,36 +98,23 @@ public class UserServiceImpl implements UserService
 			String userId = userPolicyModel.getUserId();
 			User user = getUser(userId);
 			String userName = user.getUserName();
-
-			cell = new PdfPCell(new Phrase(policyId));
-			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-			table.addCell(cell);
-
-			cell = new PdfPCell(new Phrase(userName));
-			cell.setPaddingLeft(5);
-			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-			table.addCell(cell);
 			
-			cell = new PdfPCell(new Phrase(policyName));
-			cell.setPaddingLeft(5);
-			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-			table.addCell(cell);
+			pdfDataList.add(policyId);
+			pdfDataList.add(userName);
+			pdfDataList.add(policyName);
+			pdfDataList.add(type);
+			pdfDataList.add(dateOfPurchase.toString());
 			
-			cell = new PdfPCell(new Phrase(type));
-			cell.setPaddingLeft(5);
-			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-			table.addCell(cell);
+			for(String pdfColumn : pdfDataList)
+			{
+				cell = new PdfPCell(new Phrase(pdfColumn));
+				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				table.addCell(cell);
+				
+			}
 
-			cell = new PdfPCell(new Phrase(dateOfPurchase.toString()));
-			cell.setPaddingLeft(5);
-			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-			table.addCell(cell);
-
+			
 		}
 
 		PdfWriter.getInstance(document, out);
