@@ -1,7 +1,6 @@
 package com.policy.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
