@@ -1,8 +1,17 @@
 package com.policy.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.policy.exception.PolicyException;
+import com.policy.model.PolicyModel;
+
 @Service
-public class PolicyService {
+public interface PolicyService {
+
+	public List<PolicyModel> availablePolicies();
+
+	public PolicyModel policyDetails(String policyId) throws PolicyException;
 
 }
