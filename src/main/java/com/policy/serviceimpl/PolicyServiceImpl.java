@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.policy.entity.Policy;
+import com.policy.entity.User;
 import com.policy.exception.PolicyException;
 import com.policy.model.PolicyListModel;
 import com.policy.model.PolicyModel;
@@ -48,4 +49,17 @@ public class PolicyServiceImpl implements PolicyService {
 		} else
 			throw new PolicyException("Policy Id: " + policyId + " provided by you is not valid");
 	}
+
+	@Override
+	public Policy getPolicy(String policyId) throws PolicyException {
+		Optional<Policy> findByIdOptional = policyRepository.findById(policyId);
+		
+		Boolean isOptionalPresent = findByIdOptional.isPresent();
+		
+		if(isOptionalPresent)
+			return findByIdOptional.get();
+		else
+			throw new PolicyException("User Not Found with Id : "+policyId);
+	}
+	
 }
