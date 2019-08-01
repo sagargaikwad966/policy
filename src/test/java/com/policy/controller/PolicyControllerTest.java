@@ -95,7 +95,7 @@ public class PolicyControllerTest {
 		ResponseEntity<ResponseData> response = policyController.getPolicyAnalysis("monthly");
 		
 		assertNotNull(response);
-		assertEquals(response.getStatusCodeValue(), 200);
+		assertEquals(200, response.getStatusCodeValue());
 		assertEquals(response.getBody().getData(), trendModel);
 	}
 }
