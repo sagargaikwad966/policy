@@ -10,6 +10,6 @@ import com.policy.model.UserPolicyModel;
 @Service
 public interface UserPolicyService {
 
-	List<UserPolicyModel> getUserPolicyByUserId(String UserId) throws PolicyException;
+	List<UserPolicyModel> getUserPolicyByUserId(String userId) throws PolicyException;
 
 }

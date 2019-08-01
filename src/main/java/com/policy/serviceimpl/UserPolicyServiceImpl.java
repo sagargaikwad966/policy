@@ -21,13 +21,13 @@ public class UserPolicyServiceImpl implements UserPolicyService {
 	UserPolicyRepository userPolicyRepository;
 
 	@Override
-	public List<UserPolicyModel> getUserPolicyByUserId(String UserId) throws PolicyException {
+	public List<UserPolicyModel> getUserPolicyByUserId(String userId) throws PolicyException {
 
 		List<UserPolicyModel> userPolicyModels = new ArrayList<>();
 
 		List<UserPolicy> userPolicies;
 
-		Optional<List<UserPolicy>> userPoliciesOptional = userPolicyRepository.findByUserId(UserId);
+		Optional<List<UserPolicy>> userPoliciesOptional = userPolicyRepository.findByUserId(userId);
 
 		boolean isOptionalPresent = userPoliciesOptional.isPresent();
 
