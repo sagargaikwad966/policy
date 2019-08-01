@@ -473,8 +473,8 @@ public class UserServiceImpl implements UserService
 		List<String> ageRange = Stream.of(ageLimit.split("-"))
 		.map(elem -> new String(elem))
 		.collect(Collectors.toList());
-		
-		if(userAge > Integer.valueOf(ageRange.get(0)) && userAge < Integer.valueOf(ageRange.get(1)))
+		boolean valid = (userAge > Integer.valueOf(ageRange.get(0)) && userAge < Integer.valueOf(ageRange.get(1)));
+		if(valid)
 			return true;
 		else
 			return false;
