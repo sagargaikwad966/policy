@@ -59,26 +59,22 @@ public class UserServiceImpl implements UserService
 
 		Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
 
-		PdfPCell hcell;
-		hcell = new PdfPCell(new Phrase("Policy Id", headFont));
-		hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-		table.addCell(hcell);
+		List<String> pdfHeaderList = new ArrayList<>();
+		pdfHeaderList.add("Policy Id");
+		pdfHeaderList.add("User Name");
+		pdfHeaderList.add("Policy Name");
+		pdfHeaderList.add("Policy Type");
+		pdfHeaderList.add("Date Of Purchase");
 		
-		hcell = new PdfPCell(new Phrase("User Name", headFont));
-		hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-		table.addCell(hcell);
-
-		hcell = new PdfPCell(new Phrase("Policy Name", headFont));
-		hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-		table.addCell(hcell);
+		for(String pdfHeader : pdfHeaderList )
+		{
+			PdfPCell hcell;
+			hcell = new PdfPCell(new Phrase(pdfHeader, headFont));
+			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			table.addCell(hcell);
+		}
 		
-		hcell = new PdfPCell(new Phrase("Policy Type", headFont));
-		hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-		table.addCell(hcell);
-
-		hcell = new PdfPCell(new Phrase("Date Of Purchase", headFont));
-		hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-		table.addCell(hcell);
+		
 
 		for (UserPolicyModel userPolicyModel : userPolicyModelList) {
 
