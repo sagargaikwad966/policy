@@ -170,13 +170,9 @@ public class UserServiceImpl implements UserService
 		Integer userAge = Period.between(user.getDob(), LocalDate.now()).getYears();
 		
 		List<String> ageRange = Stream.of(ageLimit.split("-"))
-		.map(elem -> new String(elem))
+		.map(elem -> new StringBuilder(elem).toString())
 		.collect(Collectors.toList());
-		boolean valid = (userAge > Integer.valueOf(ageRange.get(0)) && userAge < Integer.valueOf(ageRange.get(1)));
-		if(valid)
-			return true;
-		else
-			return false;
+		return (userAge > Integer.valueOf(ageRange.get(0)) && userAge < Integer.valueOf(ageRange.get(1)));
 	}
 
 	@Override
