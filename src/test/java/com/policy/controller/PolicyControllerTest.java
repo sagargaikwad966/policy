@@ -43,7 +43,7 @@ public class PolicyControllerTest {
 		policyListModel = new PolicyListModel();
 		policyListModel.setPolicyId("POCID12");
 		policyListModel.setPolicyName("Life Insurance");
-		
+
 		policyList=new ArrayList<>();
 		policyList.add(policyListModel);
 
@@ -72,10 +72,10 @@ public class PolicyControllerTest {
 		Mockito.when(policyService.policyDetails("POC12")).thenReturn(policyModel);
 		ResponseEntity<PolicyModel> policy = policyController.policyDetails("POC12");
 		assertNotNull(policy);
-		
+
 	}
 	@Test
-	public void testGetPolicyAnalysis() {
+	public void testGetPolicyAnalysis() throws PolicyException {
 
 		TrendModel trendModel = new TrendModel();
 		Map<String, PolicyAnalysis> policyAnalysisMap = new HashMap();
@@ -91,9 +91,9 @@ public class PolicyControllerTest {
 		trendModel.setPolicyAnalysisMap(policyAnalysisMap);
 
 		Mockito.when(policyService.getPolicyAnalysis("monthly")).thenReturn(trendModel);
-		
+
 		ResponseEntity<ResponseData> response = policyController.getPolicyAnalysis("monthly");
-		
+
 		assertNotNull(response);
 		assertEquals(200, response.getStatusCodeValue());
 		assertEquals(response.getBody().getData(), trendModel);
