@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.policy.entity.UserPolicy;
+import com.policy.exception.PolicyException;
 import com.policy.model.UserPolicyModel;
 import com.policy.repository.UserPolicyRepository;
 import com.policy.service.UserPolicyService;
@@ -20,7 +21,7 @@ public class UserPolicyServiceImpl implements UserPolicyService {
 	UserPolicyRepository userPolicyRepository;
 
 	@Override
-	public List<UserPolicyModel> getUserPolicyByUserId(String UserId) throws Exception {
+	public List<UserPolicyModel> getUserPolicyByUserId(String UserId) throws PolicyException {
 
 		List<UserPolicyModel> userPolicyModels = new ArrayList<>();
 
@@ -42,7 +43,7 @@ public class UserPolicyServiceImpl implements UserPolicyService {
 
 			});
 		} else {
-			throw new Exception("No product found");
+			throw new PolicyException("No Policy available !!!");
 		}
 		return userPolicyModels;
 	}
