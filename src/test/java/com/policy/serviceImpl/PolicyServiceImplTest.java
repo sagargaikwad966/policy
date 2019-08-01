@@ -119,7 +119,7 @@ public class PolicyServiceImplTest {
 	}
 
 	@Test
-	public void testGetPolicyAnalysis() {
+	public void testGetPolicyAnalysis() throws PolicyException {
 		UserPolicy userPolicy = new UserPolicy("USER_PRI_2", "USER", "POC12", LocalDate.of(1800, 01, 01), "ACTIVE");
 
 		List<UserPolicy> policyList = new ArrayList();
@@ -131,7 +131,7 @@ public class PolicyServiceImplTest {
 	}
 	
 	@Test
-	public void testGetPolicyAnalysisMonthly() {
+	public void testGetPolicyAnalysisMonthly() throws PolicyException {
 		UserPolicy userPolicy = new UserPolicy("USER_PRI_2", "USER", "POC12", LocalDate.now(), "ACTIVE");
 
 		List<UserPolicy> policyList = new ArrayList();
@@ -143,13 +143,25 @@ public class PolicyServiceImplTest {
 	}
 	
 	@Test
-	public void testGetPolicyAnalysisWeekly() {
+	public void testGetPolicyAnalysisWeekly() throws PolicyException {
 		UserPolicy userPolicy = new UserPolicy("USER_PRI_2", "USER", "POC12", LocalDate.now(), "ACTIVE");
 
 		List<UserPolicy> policyList = new ArrayList();
 		policyList.add(userPolicy);
 		Mockito.when(userPolicyRepository.findAll()).thenReturn(policyList);
 		Mockito.when(policyRepository.findById(userPolicy.getPolicyId())).thenReturn(Optional.of(policy));
+		TrendModel trendModel = policyServiceImpl.getPolicyAnalysis("weekly");
+		assertNotNull(trendModel);
+	}
+	
+	@Test(expected = PolicyException.class)
+	public void testGetPolicyAnalysisNegative() throws PolicyException {
+		UserPolicy userPolicy = new UserPolicy("USER_PRI_2", "USER", "POC12", LocalDate.now(), "ACTIVE");
+
+		List<UserPolicy> policyList = new ArrayList();
+		policyList.add(userPolicy);
+		Mockito.when(userPolicyRepository.findAll()).thenReturn(policyList);
+		Mockito.when(policyRepository.findById(userPolicy.getPolicyId())).thenReturn(Optional.empty());
 		TrendModel trendModel = policyServiceImpl.getPolicyAnalysis("weekly");
 		assertNotNull(trendModel);
 	}

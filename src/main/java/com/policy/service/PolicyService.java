@@ -16,7 +16,7 @@ public interface PolicyService {
 	public List<PolicyListModel> availablePolicies() throws PolicyException;
 	public PolicyModel policyDetails(String policyId) throws PolicyException;
 	public Policy getPolicy(String policyId) throws PolicyException;
-	public TrendModel getPolicyAnalysis(String sortBy);
+	public TrendModel getPolicyAnalysis(String sortBy) throws PolicyException;
 
 
 }

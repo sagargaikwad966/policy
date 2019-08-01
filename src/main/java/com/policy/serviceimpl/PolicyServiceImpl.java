@@ -62,13 +62,13 @@ public class PolicyServiceImpl implements PolicyService {
 		{
 			throw new PolicyException("Policy Id: " + policyId + " provided by you is not valid");
 		}
-			
+
 	}
 
 	@Override
-	public TrendModel getPolicyAnalysis(String sortBy) {
+	public TrendModel getPolicyAnalysis(String sortBy) throws PolicyException {
 		Map policyAnalysisMap = new HashMap();
-		Policy policy = new Policy();
+		Policy policy = null;
 		TrendModel trendModel = new TrendModel();
 		LocalDate date;
 		DecimalFormat df = new DecimalFormat("0.00");
@@ -88,9 +88,11 @@ public class PolicyServiceImpl implements PolicyService {
 		for(UserPolicy userPolicy : policyList) {
 
 			Optional<Policy> policyOptional = policyRepository.findById(userPolicy.getPolicyId());
-
-			if(policyOptional.isPresent()) {
+			boolean isPresent = policyOptional.isPresent();
+			if(isPresent) {
 				policy = policyOptional.get();
+			}  else {
+				throw new PolicyException("No Policy available !!!");
 			}
 
 			Double numberOfPoliciesSold = userPolicyRepository.getPolicyCount(userPolicy.getPolicyId(), date, LocalDate.now());
