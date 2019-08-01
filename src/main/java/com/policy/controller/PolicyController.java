@@ -25,7 +25,7 @@ public class PolicyController {
 	PolicyService policyService;
 
 	@GetMapping
-	public ResponseEntity<ResponseData> availablePolicies() {
+	public ResponseEntity<ResponseData> availablePolicies() throws PolicyException {
 
 		List<PolicyModel> policyModelList = policyService.availablePolicies();
 		Map<Integer, String> status = new HashMap();

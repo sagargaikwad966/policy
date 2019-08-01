@@ -21,9 +21,11 @@ public class PolicyServiceImpl implements PolicyService {
 	PolicyRepository policyRepository;
 
 	@Override
-	public List<PolicyModel> availablePolicies() {
+	public List<PolicyModel> availablePolicies() throws PolicyException {
 
 		List<Policy> policyList = policyRepository.findAllByStatus("ACTIVE");
+		if(policyList.isEmpty())
+			throw new PolicyException("Sorry ...No policy is available");
 		List<PolicyModel> policyModelList = new ArrayList<>();
 		for (Policy policy : policyList) {
 			PolicyModel policyModel = new PolicyModel();

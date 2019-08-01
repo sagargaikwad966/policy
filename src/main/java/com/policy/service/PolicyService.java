@@ -10,7 +10,7 @@ import com.policy.model.PolicyModel;
 @Service
 public interface PolicyService {
 
-	public List<PolicyModel> availablePolicies();
+	public List<PolicyModel> availablePolicies() throws PolicyException;
 
 	public PolicyModel policyDetails(String policyId) throws PolicyException;
 
