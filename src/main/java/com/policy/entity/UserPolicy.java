@@ -1,7 +1,7 @@
 package com.policy.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,7 +24,7 @@ public class UserPolicy implements Serializable{
 	private String userPolicyId;
 	private String userId;
 	private String policyId;
-	private LocalDateTime dateOfPurchase;
+	private LocalDate dateOfPurchase;
 	private String status;
 
 }

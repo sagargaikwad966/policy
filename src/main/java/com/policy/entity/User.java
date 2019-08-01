@@ -1,7 +1,7 @@
 package com.policy.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,7 +24,7 @@ public class User implements Serializable{
 	private String userId;
 	private String userName;
 	private String password;
-	private LocalDateTime dob;
+	private LocalDate dob;
 	private String email;
 	private String phone;
 	private String status;
