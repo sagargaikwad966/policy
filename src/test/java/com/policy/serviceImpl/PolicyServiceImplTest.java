@@ -2,6 +2,7 @@ package com.policy.serviceImpl;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +16,13 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.policy.entity.Policy;
+import com.policy.entity.UserPolicy;
 import com.policy.exception.PolicyException;
 import com.policy.model.PolicyListModel;
 import com.policy.model.PolicyModel;
+import com.policy.model.TrendModel;
 import com.policy.repository.PolicyRepository;
+import com.policy.repository.UserPolicyRepository;
 import com.policy.serviceimpl.PolicyServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -30,11 +34,13 @@ public class PolicyServiceImplTest {
 	@Mock
 	PolicyRepository policyRepository;
 
+	@Mock
+	UserPolicyRepository userPolicyRepository;
+
 	List<Policy> policyList;
 	List<Policy> policyListEmpty;
 	PolicyModel policyModel;
 	Optional<Policy> policyOptional;
-
 	Policy policy;
 
 	@Before
@@ -54,6 +60,10 @@ public class PolicyServiceImplTest {
 		policyList.add(policy);
 
 		policyListEmpty = new ArrayList<>();
+		policyList=new ArrayList<>();
+		policyList.add(policy);
+
+		policyListEmpty=new ArrayList<>();
 
 		policyModel = new PolicyModel();
 		policyModel.setAgeLimit("25-65");
@@ -64,7 +74,7 @@ public class PolicyServiceImplTest {
 		policyModel.setSumInsured(23456.00);
 		policyModel.setTotalPremium(4567.00);
 		policyModel.setType("asdf");
-		
+
 		policyOptional = Optional.of(policy);
 	}
 
@@ -93,18 +103,30 @@ public class PolicyServiceImplTest {
 		Mockito.when(policyRepository.findByPolicyIdAndStatus("POC12", "ACTIVE")).thenReturn(Optional.empty());
 		PolicyModel response = policyServiceImpl.policyDetails("POC12");
 	}
-	
+
 	@Test
 	public void testGetPolicy() throws PolicyException {
 		Mockito.when(policyRepository.findById("POC12")).thenReturn(policyOptional);
 		Policy response=policyServiceImpl.getPolicy("POC12");
 		assertNotNull(response);
 	}
-	
+
 	@Test(expected = PolicyException.class)
 	public void testGetPolicyFailure() throws PolicyException {
 		Mockito.when(policyRepository.findById("POC12")).thenReturn(Optional.empty());
 		Policy response=policyServiceImpl.getPolicy("POC12");
 		assertNotNull(response);
+	}
+
+	@Test
+	public void testGetPolicyAnalysis() {
+		UserPolicy userPolicy = new UserPolicy("USER_PRI_2", "USER", "POC12", LocalDate.now(), "ACTIVE");
+
+		List<UserPolicy> policyList = new ArrayList();
+		policyList.add(userPolicy);
+		Mockito.when(userPolicyRepository.findAll()).thenReturn(policyList);
+		Mockito.when(policyRepository.findById(userPolicy.getPolicyId())).thenReturn(Optional.of(policy));
+		TrendModel trendModel = policyServiceImpl.getPolicyAnalysis("monthly");
+		assertNotNull(trendModel);
 	}
 }
