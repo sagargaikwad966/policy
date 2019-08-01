@@ -1,7 +1,6 @@
 package com.policy.serviceimpl;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +24,6 @@ import com.policy.service.UserService;
 @Service
 public class UserServiceImpl implements UserService 
 {
-	public static Integer id = 1;
 	
 	@Autowired
 	PolicyService policyService;
@@ -102,7 +100,7 @@ public class UserServiceImpl implements UserService
 		
 		if(tnC)
 		{
-			UserPolicy savedPolicy = new UserPolicy();
+			UserPolicy savedPolicy;
 			UserPolicyModel userPolicyModel = new UserPolicyModel();
 			
 			User user = getUser(userId);
@@ -294,9 +292,9 @@ public class UserServiceImpl implements UserService
 
 
 
-	private String createUserPolicyId(User user, Policy policy) 
+	private static String createUserPolicyId(User user, Policy policy) 
 	{
-		return user.getUserId()+"-"+policy.getPolicyId()+"-"+id++;
+		return user.getUserId()+"-"+policy.getPolicyId();
 	}
 
 

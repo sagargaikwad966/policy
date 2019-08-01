@@ -107,9 +107,9 @@ public class UserController
 	
 	
 	@PostMapping("/policy/purchase/{userId}")
-	public ResponseEntity<ResponseData> purchasePolicy(@PathVariable("userId") String userId, @RequestParam("policyId") String policyId, @RequestParam("t&c") Boolean TnC) throws PolicyException
+	public ResponseEntity<ResponseData> purchasePolicy(@PathVariable("userId") String userId, @RequestParam("policyId") String policyId, @RequestParam("t&c") Boolean tnc) throws PolicyException
 	{
-		UserPolicyModel userPolicyModel = userService.purchasePolicy(userId, policyId, TnC);
+		UserPolicyModel userPolicyModel = userService.purchasePolicy(userId, policyId, tnc);
 		Map<Integer, String> status = new HashMap();
 		status.put(200, "SUCCESSFULL TRANSACTION");
 		ResponseData response = new ResponseData("Policy Purchased successfully", status, userPolicyModel);
