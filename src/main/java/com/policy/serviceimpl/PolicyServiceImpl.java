@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.policy.entity.Policy;
 import com.policy.exception.PolicyException;
+import com.policy.model.PolicyListModel;
 import com.policy.model.PolicyModel;
 import com.policy.repository.PolicyRepository;
 import com.policy.service.PolicyService;
@@ -21,14 +22,14 @@ public class PolicyServiceImpl implements PolicyService {
 	PolicyRepository policyRepository;
 
 	@Override
-	public List<PolicyModel> availablePolicies() throws PolicyException {
+	public List<PolicyListModel> availablePolicies() throws PolicyException {
 
 		List<Policy> policyList = policyRepository.findAllByStatus("ACTIVE");
-		if(policyList.isEmpty())
+		if (policyList.isEmpty())
 			throw new PolicyException("Sorry ...No policy is available");
-		List<PolicyModel> policyModelList = new ArrayList<>();
+		List<PolicyListModel> policyModelList = new ArrayList<>();
 		for (Policy policy : policyList) {
-			PolicyModel policyModel = new PolicyModel();
+			PolicyListModel policyModel = new PolicyListModel();
 			BeanUtils.copyProperties(policy, policyModel);
 			policyModelList.add(policyModel);
 		}
@@ -38,7 +39,7 @@ public class PolicyServiceImpl implements PolicyService {
 	@Override
 	public PolicyModel policyDetails(String policyId) throws PolicyException {
 
-		Optional<Policy> policyOptional = policyRepository.findByPolicyIdAndStatus(policyId,"ACTIVE");
+		Optional<Policy> policyOptional = policyRepository.findByPolicyIdAndStatus(policyId, "ACTIVE");
 		if (policyOptional.isPresent()) {
 			Policy policy = policyOptional.get();
 			PolicyModel policyModel = new PolicyModel();

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.policy.exception.PolicyException;
+import com.policy.model.PolicyListModel;
 import com.policy.model.PolicyModel;
 import com.policy.model.ResponseData;
 import com.policy.service.PolicyService;
@@ -27,7 +28,7 @@ public class PolicyController {
 	@GetMapping
 	public ResponseEntity<ResponseData> availablePolicies() throws PolicyException {
 
-		List<PolicyModel> policyModelList = policyService.availablePolicies();
+		List<PolicyListModel> policyModelList = policyService.availablePolicies();
 		Map<Integer, String> status = new HashMap();
 		status.put(200, "SUCCESSFULL TRANSACTION");
 		ResponseData response = new ResponseData("Please find below list of available policies ", status,
