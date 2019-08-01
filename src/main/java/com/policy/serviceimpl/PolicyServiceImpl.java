@@ -57,8 +57,12 @@ public class PolicyServiceImpl implements PolicyService {
 			PolicyModel policyModel = new PolicyModel();
 			BeanUtils.copyProperties(policy, policyModel);
 			return policyModel;
-		} else
+		} 
+		else
+		{
 			throw new PolicyException("Policy Id: " + policyId + " provided by you is not valid");
+		}
+			
 	}
 
 	@Override
