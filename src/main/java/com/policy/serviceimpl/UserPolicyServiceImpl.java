@@ -25,7 +25,7 @@ public class UserPolicyServiceImpl implements UserPolicyService {
 
 		List<UserPolicyModel> userPolicyModels = new ArrayList<>();
 
-		List<UserPolicy> userPolicies = new ArrayList<UserPolicy>();
+		List<UserPolicy> userPolicies;
 
 		Optional<List<UserPolicy>> userPoliciesOptional = userPolicyRepository.findByUserId(UserId);
 

@@ -36,7 +36,7 @@ public class UserController
 	UserService userService;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<InputStreamResource> UserPolicyFileReport(@PathVariable("id") String userId)
+	public ResponseEntity<InputStreamResource> userPolicyFileReport(@PathVariable("id") String userId)
 			throws PolicyException, DocumentException {
 
 		List<UserPolicyModel> userPolicyModelList = userPolicyService.getUserPolicyByUserId(userId);
@@ -50,88 +50,6 @@ public class UserController
 				.body(new InputStreamResource(bis));
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@PostMapping("/policy/purchase/{userId}")
 	public ResponseEntity<ResponseData> purchasePolicy(@PathVariable("userId") String userId, @RequestParam("policyId") String policyId, @RequestParam("t&c") Boolean tnc) throws PolicyException
 	{
@@ -142,8 +60,6 @@ public class UserController
 		ResponseData response = new ResponseData("Policy Purchased successfully", status, userPolicyModel);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
-	
-	
 	
 
 }
