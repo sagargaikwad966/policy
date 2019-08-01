@@ -90,7 +90,7 @@ public class PolicyServiceImpl implements PolicyService {
 			}
 
 			Double numberOfPoliciesSold = userPolicyRepository.getPolicyCount(userPolicy.getPolicyId(), date, LocalDate.now());
-			Double percentage = Double.parseDouble(df.format(((numberOfPoliciesSold/totalPolicies) * 100.00)));
+			String percentage = df.format(((numberOfPoliciesSold/totalPolicies) * 100.00)) + " %";
 
 			PolicyAnalysis policyAnalysis = new PolicyAnalysis();
 

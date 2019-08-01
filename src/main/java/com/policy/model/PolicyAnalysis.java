@@ -11,5 +11,5 @@ public class PolicyAnalysis {
 
 	private String name;
 	private Double numberOfPoliciesSold;
-	private Double percentage;
+	private String percentage;
 }
