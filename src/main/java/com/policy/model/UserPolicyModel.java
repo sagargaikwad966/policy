@@ -1,7 +1,7 @@
 package com.policy.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import org.springframework.stereotype.Component;
 
@@ -19,7 +19,7 @@ public class UserPolicyModel implements Serializable{
 	private String userPolicyId;
 	private String userId;
 	private String policyId;
-	private LocalDateTime dateOfPurchase;
+	private LocalDate dateOfPurchase;
 	private String status;
 
 }

@@ -6,11 +6,12 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.itextpdf.text.DocumentException;
+import com.policy.exception.PolicyException;
 import com.policy.model.UserPolicyModel;
 
 @Service
 public interface GenerateUserPolicyFileReportService {
 
-	ByteArrayInputStream pdfUserPolicyFileReport(List<UserPolicyModel> userPolicyModelList) throws DocumentException;
+	ByteArrayInputStream pdfUserPolicyFileReport(List<UserPolicyModel> userPolicyModelList) throws DocumentException, PolicyException;
 
 }

@@ -28,7 +28,8 @@ public class GenerateUserPolicyFileReportController {
 	UserPolicyService userPolicyService;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<InputStreamResource> UserPolicyFileReport(@PathVariable("id")String userId) throws Exception {
+	public ResponseEntity<InputStreamResource> UserPolicyFileReport(@PathVariable("id") String userId)
+			throws Exception {
 
 		List<UserPolicyModel> userPolicyModelList = userPolicyService.getUserPolicyByUserId(userId);
 
