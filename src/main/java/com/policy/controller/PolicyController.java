@@ -52,7 +52,7 @@ public class PolicyController {
 	@GetMapping("/trend/{sortBy}")
 	public ResponseEntity<ResponseData> getPolicyAnalysis(@PathVariable(value = "sortBy") String sortBy){
 
-		Map<Integer, String> statusMap = new HashMap<Integer, String>();
+		Map<Integer, String> statusMap = new HashMap();
 		statusMap.put(200, "Search successful.");
 		TrendModel trendModel = policyService.getPolicyAnalysis(sortBy);
 		ResponseData response = new ResponseData("Policy trend Analysis is as below: ", statusMap, trendModel);
