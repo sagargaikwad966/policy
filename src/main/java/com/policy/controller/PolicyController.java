@@ -27,27 +27,19 @@ public class PolicyController {
 	PolicyService policyService;
 
 	@GetMapping
-	public ResponseEntity<ResponseData> availablePolicies() throws PolicyException {
+	public ResponseEntity<List<PolicyListModel>> availablePolicies() throws PolicyException {
 
 		List<PolicyListModel> policyModelList = policyService.availablePolicies();
-		Map<Integer, String> status = new HashMap();
-		status.put(200, "SUCCESSFULL TRANSACTION");
-		ResponseData response = new ResponseData("Please find below list of available policies ", status,
-				policyModelList);
-		return new ResponseEntity<>(response, HttpStatus.OK);
+		return new ResponseEntity<>(policyModelList, HttpStatus.OK);
 
 	}
 
 	@GetMapping("/{policy_id}")
-	public ResponseEntity<ResponseData> policyDetails(@PathVariable("policy_id") String policyId)
+	public ResponseEntity<PolicyModel> policyDetails(@PathVariable("policy_id") String policyId)
 			throws PolicyException {
 
 		PolicyModel policyModel = policyService.policyDetails(policyId);
-		Map<Integer, String> status = new HashMap();
-		status.put(200, "SUCCESSFULL TRANSACTION");
-		ResponseData response = new ResponseData("Please find below details of policy Id : " + policyId, status,
-				policyModel);
-		return new ResponseEntity<>(response, HttpStatus.OK);
+		return new ResponseEntity<>(policyModel, HttpStatus.OK);
 	}
 	@GetMapping("/trend/{sortBy}")
 	public ResponseEntity<ResponseData> getPolicyAnalysis(@PathVariable(value = "sortBy") String sortBy){
